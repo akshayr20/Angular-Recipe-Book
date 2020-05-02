@@ -27,14 +27,15 @@
           <span class="caret"></span>
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button
+          <a
             ngbDropdownItem
+            routerLink="/shopping-list"
             (click)="onAddToShoppingList(selectedRecipe.ingredients)"
           >
             To Shopping List
-          </button>
-          <button ngbDropdownItem>Edit Recipe</button>
-          <button ngbDropdownItem>Delete Recipe</button>
+          </a>
+          <a ngbDropdownItem routerLink="edit">Edit Recipe</a>
+          <a ngbDropdownItem>Delete Recipe</a>
         </div>
       </div>
     </div>
