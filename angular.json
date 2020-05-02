@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "recipe-book"
+    }
+  },
+  "defaultProject": "recipe-book",
+  "cli": {
+    "analytics": "0249293a-aae3-408e-ae9d-6f43875ec0b1"
+  }
 }
