@@ -1,20 +1,18 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Recipe Book</a>
-
   <button
     class="navbar-toggler"
     type="button"
+    (click)="navCollapsed = !navCollapsed"
     data-toggle="collapse"
-    data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+    data-target="#navbarTogglerDemo02"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div
-    class="collapse navbar-collapse justify-content-between"
+    [class.collapse]="navCollapsed"
+    class="navbar-collapse justify-content-between"
     id="navbarNavDropdown"
   >
     <ul class="navbar-nav">
@@ -28,11 +26,40 @@
       </li>
     </ul>
 
-    <div class="dropdown">
-      <a href="#" class="dropdown-toggle">Manage <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Save Data</a></li>
-        <li><a href="#">Fetch Data</a></li>
+    <div
+      class="navbar-collapse"
+      [class.collapse]="collapsed"
+      id="navbarContent"
+    >
+      <ul class="navbar-nav ml-auto">
+        <li
+          class="nav-item"
+          ngbDropdown
+          display="dynamic"
+          placement="bottom-right"
+        >
+          <a
+            class="nav-link"
+            style="cursor: pointer;"
+            ngbDropdownToggle
+            id="navbarDropdown3"
+            role="button"
+          >
+            Manage
+          </a>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="navbarDropdown3"
+            class="dropdown-menu"
+          >
+            <a ngbDropdownItem href="#" (click)="$event.preventDefault()"
+              >Save Data</a
+            >
+            <a ngbDropdownItem href="#" (click)="$event.preventDefault()"
+              >Fetch Data</a
+            >
+          </div>
+        </li>
       </ul>
     </div>
   </div>

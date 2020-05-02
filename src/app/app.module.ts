@@ -13,6 +13,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ToastsContainer } from './toast/toasts-container.component';
 import { ToastService } from './toast/toast-service';
+import { DropwdownDirective } from './shared/directives/dropwdown.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ToastService } from './toast/toast-service';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    ToastsContainer
+    ToastsContainer,
+    DropwdownDirective
   ],
   imports: [
     BrowserModule,

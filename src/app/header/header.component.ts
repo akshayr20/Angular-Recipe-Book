@@ -7,6 +7,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() selectedFeature = new EventEmitter<string>();
+  collapsed = true;
+  navCollapsed = true;
   constructor() {}
 
   onSelect(feature: string) {
