@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { ShoppingListService } from 'src/app/shopping-list/service/shopping-list.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +12,35 @@ export class RecipesService {
   private recipes: Array<Recipe> = [
     new Recipe(
       'Veg Sandwich',
-      'This is a test',
-      'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg'
+      'A super tasty french veg sandwich',
+      'https://c1.peakpx.com/wallpaper/368/646/353/sandwich-ham-cheese-pommes-fast-food-wallpaper-preview.jpg',
+      [
+        new Ingredient('Bread', 2),
+        new Ingredient('Carrots', 1),
+        new Ingredient('Pickle', 1),
+        new Ingredient('Tomatoes', 2),
+      ]
     ),
     new Recipe(
-      'Grilled Sandwich',
-      'This is a test',
-      'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg'
+      'Chicken Stack Burger',
+      'The most popular chicken stack burger',
+      'https://img1.mashed.com/img/gallery/the-best-copycat-popeyes-chicken-sandwich-recipe/the-perfect-popeyes-chicken-sandwich-directions-1574269393.jpg',
+      [
+        new Ingredient('Chicken', 2),
+        new Ingredient('Bun', 2),
+        new Ingredient('Tomatoes', 1),
+        new Ingredient('Onion', 1),
+      ]
     ),
   ];
 
-  constructor() {}
+  constructor(private shoppingListService: ShoppingListService) {}
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Array<Ingredient>) {
+    this.shoppingListService.addIngredients(ingredients);
   }
 }
