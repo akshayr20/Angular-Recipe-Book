@@ -1,1 +1,9 @@
-<app-recipe-item></app-recipe-item>
+<div class="flex-row">
+  <button class="btn btn-success">New Recipe</button>
+</div>
+
+<hr>
+
+<a href="#" class="list-group max-width" *ngFor="let recipe of recipes">
+  <app-recipe-item [recipe]="recipe"></app-recipe-item>
+</a>
