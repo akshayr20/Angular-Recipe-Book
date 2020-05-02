@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/models/ingredient.model';
+import { ShoppingListService } from './service/shopping-list.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,12 +9,11 @@ import { Ingredient } from '../shared/models/ingredient.model';
   styleUrls: ['./shopping-list.component.scss'],
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients: Array<Ingredient> = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 3),
-  ];
+  ingredients$: BehaviorSubject<Array<Ingredient>>;
 
-  constructor() {}
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ingredients$ = this.shoppingListService.getIngredient();
+  }
 }
