@@ -1,14 +1,11 @@
-<app-header (selectedFeature)="onNavigate($event)"></app-header>
+<app-header></app-header>
 
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
 
 <div class="container sm-padding">
   <div class="row">
     <div class="col-md-12">
-      <app-recipes *ngIf="loadedFeature === 'recipes'"></app-recipes>
-      <app-shopping-list
-        *ngIf="loadedFeature !== 'recipes'"
-      ></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

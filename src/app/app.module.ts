@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppRoutingModule } from './app.routes';
+
 import { RecipesService } from './recipes/service/recipes.service';
 import { ShoppingListService } from './shopping-list/service/shopping-list.service';
 import { ToastService } from './toast/toast-service';
@@ -31,7 +33,7 @@ import { DropwdownDirective } from './shared/directives/dropwdown.directive';
     ToastsContainer,
     DropwdownDirective,
   ],
-  imports: [BrowserModule, FormsModule, NgbModule],
+  imports: [BrowserModule, FormsModule, NgbModule, AppRoutingModule],
   providers: [ToastService, RecipesService, ShoppingListService],
   bootstrap: [AppComponent],
 })
