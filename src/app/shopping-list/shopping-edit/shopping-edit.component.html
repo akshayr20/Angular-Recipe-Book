@@ -1,23 +1,45 @@
 <div class="row">
   <div class="col-md-12">
-    <form>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" />
+          <label for="ingredient">Name</label>
+          <input
+            type="text"
+            id="ingredient"
+            class="form-control"
+            required
+            name="ingredient"
+            ngModel
+            #ingredient="ngModel"
+          />
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
-          <input type="number" id="amount" class="form-control" />
+          <input
+            class="form-control"
+            id="amount"
+            type="number"
+            required
+            name="amount"
+            ngModel
+            #amount="ngModel"
+          />
         </div>
       </div>
-          <div class="row">
-            <div class="col-sm-12 btn-container">
-              <button class="btn btn-success" type="submit">Add</button>
-              <button class="btn btn-danger" type="button">Delete</button>
-              <button class="btn btn-primary" type="button">Clear</button>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-sm-12 btn-container">
+          <button
+            class="btn btn-success"
+            [ngClass]="{ disabled: shoppingForm.invalid }"
+            type="submit"
+          >
+            Add
+          </button>
+          <button class="btn btn-danger" type="button">Delete</button>
+          <button class="btn btn-primary" type="button">Clear</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
