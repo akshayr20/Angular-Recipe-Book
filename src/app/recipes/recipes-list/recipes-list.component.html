@@ -7,6 +7,6 @@
 <app-recipe-item
   *ngFor="let recipeEl of recipes"
   [recipe]="recipeEl"
-  (click)="selectedRecipe.emit(recipeEl)"
+  (click)="onRecipeSelected(recipeEl)"
   class="pointer"
 ></app-recipe-item>
