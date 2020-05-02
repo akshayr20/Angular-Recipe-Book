@@ -7,6 +7,5 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent {
   @Input() recipe: Recipe;
-
-  constructor() {}
+  @Input() index: number;
 }
