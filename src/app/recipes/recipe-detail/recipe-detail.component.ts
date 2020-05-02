@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../service/recipes.service';
 import { Observable } from 'rxjs';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,5 +15,9 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.selectedRecipe$ = this.recipeService.recipeSelected$;
+  }
+
+  onAddToShoppingList(ingredients: Array<Ingredient>) {
+    this.recipeService.addIngredientsToShoppingList(ingredients);
   }
 }

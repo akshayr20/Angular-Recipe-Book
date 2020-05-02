@@ -22,7 +22,12 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients = [...this.ingredients, ingredient];
-    this.ingredients$.next(this.ingredients);
+    this.ingredients$.next(this.ingredients.slice());
     this.toastService.success('Ingredient added successfully!');
+  }
+
+  addIngredients(ingredients: Array<Ingredient>) {
+    this.ingredients = [...this.ingredients, ...ingredients];
+    this.ingredients$.next(this.ingredients.slice());
   }
 }
