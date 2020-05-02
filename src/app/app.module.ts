@@ -19,6 +19,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ToastsContainer } from './toast/toasts-container.component';
 import { DropwdownDirective } from './shared/directives/dropwdown.directive';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DropwdownDirective } from './shared/directives/dropwdown.directive';
     ShoppingEditComponent,
     ToastsContainer,
     DropwdownDirective,
+    RecipeStartComponent,
   ],
   imports: [BrowserModule, FormsModule, NgbModule, AppRoutingModule],
   providers: [ToastService, RecipesService, ShoppingListService],

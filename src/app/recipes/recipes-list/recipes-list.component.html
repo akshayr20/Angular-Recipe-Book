@@ -5,8 +5,7 @@
 <hr />
 
 <app-recipe-item
-  *ngFor="let recipeEl of recipes"
+  *ngFor="let recipeEl of recipes; let i = index"
   [recipe]="recipeEl"
-  (click)="onRecipeSelected(recipeEl)"
-  class="pointer"
+  [index]="i"
 ></app-recipe-item>

@@ -1,4 +1,4 @@
-<div *ngIf="selectedRecipe$ | async as selectedRecipe; else selectRecipeText">
+<div *ngIf="selectedRecipe">
   <div class="row">
     <div class="col-sm-12">
       <img
@@ -27,7 +27,10 @@
           <span class="caret"></span>
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem (click)="onAddToShoppingList(selectedRecipe.ingredients)">
+          <button
+            ngbDropdownItem
+            (click)="onAddToShoppingList(selectedRecipe.ingredients)"
+          >
             To Shopping List
           </button>
           <button ngbDropdownItem>Edit Recipe</button>
@@ -56,7 +59,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #selectRecipeText>
-  <p>Please Select a Recipe</p>
-</ng-template>
