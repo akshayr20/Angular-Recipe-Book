@@ -1,8 +1,16 @@
 <div class="row">
-  <div class="col-md-5">
-    <app-recipes-list></app-recipes-list>
-  </div>
-  <div class="col-md-7">
-    <app-recipe-detail></app-recipe-detail>
-  </div>
+  <app-recipes-list
+    class="col-md-6"
+    (selectedRecipe)="this.selectedRecipe$.next($event)"
+  ></app-recipes-list>
+
+  <app-recipe-detail
+    class="col-md-6"
+    *ngIf="selectedRecipe$ | async as selectedRecipe; else selectRecipeText"
+    [selectedRecipe]="selectedRecipe"
+  ></app-recipe-detail>
+
+  <ng-template #selectRecipeText>
+    <p>Please Select a Recipe</p>
+  </ng-template>
 </div>
