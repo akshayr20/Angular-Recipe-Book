@@ -2,8 +2,11 @@
   <button class="btn btn-success">New Recipe</button>
 </div>
 
-<hr>
+<hr />
 
-<a href="#" class="list-group col-sm-12" *ngFor="let recipe of recipes">
-  <app-recipe-item [recipe]="recipe"></app-recipe-item>
-</a>
+<app-recipe-item
+  *ngFor="let recipeEl of recipes"
+  [recipe]="recipeEl"
+  (click)="selectedRecipe.emit(recipeEl)"
+  class="pointer"
+></app-recipe-item>
