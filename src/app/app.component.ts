@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ToastService } from './toast/toast-service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   loadedFeature = 'recipes';
+
   onNavigate(feature: string) {
     this.loadedFeature = feature;
   }

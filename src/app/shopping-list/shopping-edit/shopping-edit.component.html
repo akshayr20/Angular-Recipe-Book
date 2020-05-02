@@ -3,13 +3,13 @@
     <form (ngSubmit)="onSubmit()" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="ingredient">Name</label>
+          <label for="name">Name</label>
           <input
             type="text"
-            id="ingredient"
+            id="name"
             class="form-control"
             required
-            name="ingredient"
+            name="name"
             ngModel
             #ingredient="ngModel"
           />
@@ -27,6 +27,7 @@
           />
         </div>
       </div>
+
       <div class="row">
         <div class="col-sm-12 btn-container">
           <button
@@ -37,7 +38,7 @@
             Add
           </button>
           <button class="btn btn-danger" type="button">Delete</button>
-          <button class="btn btn-primary" type="button">Clear</button>
+          <button class="btn btn-primary" type="button" (click)="resetForm()">Clear</button>
         </div>
       </div>
     </form>
