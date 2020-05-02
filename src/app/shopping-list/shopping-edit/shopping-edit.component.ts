@@ -1,21 +1,30 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Ingredient } from '../../shared/models/ingredient.model';
+import { ToastService } from 'src/app/toast/toast-service';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.scss'],
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent {
   @ViewChild('f', { static: true }) shoppingForm: NgForm;
+  @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor(private toastService: ToastService) {}
 
   onSubmit() {
     if (this.shoppingForm.valid) {
-      console.log(this.shoppingForm.value);
+      const { name, amount } = this.shoppingForm.value;
+      this.ingredientAdded.emit(new Ingredient(name, amount));
+      this.shoppingForm.reset();
+      this.toastService.success('Ingredient added successfully!');
     }
+  }
+
+  resetForm() {
+    this.shoppingForm.reset();
+    this.toastService.warning('Form cleared successfully!');
   }
 }
