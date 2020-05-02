@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Recipe } from './recipe.model';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
@@ -8,6 +6,5 @@ import { Subject } from 'rxjs';
   styleUrls: ['./recipes.component.scss'],
 })
 export class RecipesComponent {
-  selectedRecipe$: Subject<Recipe> = new Subject();
   constructor() {}
 }
