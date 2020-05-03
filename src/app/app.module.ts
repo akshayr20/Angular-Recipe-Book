@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routes';
@@ -18,7 +18,6 @@ import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-i
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ToastsContainer } from './toast/toasts-container.component';
-import { DropwdownDirective } from './shared/directives/dropwdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
@@ -33,11 +32,10 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ShoppingListComponent,
     ShoppingEditComponent,
     ToastsContainer,
-    DropwdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
   ],
-  imports: [BrowserModule, FormsModule, NgbModule, AppRoutingModule],
+  imports: [BrowserModule, ReactiveFormsModule, NgbModule, AppRoutingModule],
   providers: [ToastService, RecipesService, ShoppingListService],
   bootstrap: [AppComponent],
 })

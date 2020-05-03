@@ -1,14 +1,13 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { ShoppingListService } from 'src/app/shopping-list/service/shopping-list.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesService {
-  recipeSelected$ = new EventEmitter<Recipe>();
-
   private recipes: Array<Recipe> = [
     new Recipe(
       'Veg Sandwich',
@@ -34,10 +33,12 @@ export class RecipesService {
     ),
   ];
 
+  private recipes$ = new BehaviorSubject<Array<Recipe>>(this.recipes);
+
   constructor(private shoppingListService: ShoppingListService) {}
 
   getRecipes() {
-    return this.recipes.slice();
+    return this.recipes$;
   }
 
   getRecipe(index: number) {

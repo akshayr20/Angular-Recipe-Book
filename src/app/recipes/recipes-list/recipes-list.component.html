@@ -1,11 +1,15 @@
 <div class="flex-row">
-  <button class="btn btn-success" (click)="goToCreateNewRecipe()">New Recipe</button>
+  <button class="btn btn-success" (click)="goToCreateNewRecipe()">
+    New Recipe
+  </button>
 </div>
 
 <hr />
 
-<app-recipe-item
-  *ngFor="let recipeEl of recipes; let i = index"
-  [recipe]="recipeEl"
-  [index]="i"
-></app-recipe-item>
+<ng-container *ngIf="recipes$ | async as recipes">
+  <app-recipe-item
+    *ngFor="let recipeEl of recipes; let i = index"
+    [recipe]="recipeEl"
+    [index]="i"
+  ></app-recipe-item>
+</ng-container>
