@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService, AuthResponseData } from '../service/auth.service';
 import { ToastService } from 'src/app/toast/toast-service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -14,6 +15,7 @@ export class AuthComponent {
   isLoginMode = false;
   errorMessage = '';
   constructor(
+    private route: Router,
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastService
@@ -34,7 +36,6 @@ export class AuthComponent {
     }
     const { email, password } = this.authForm.value;
     let authObs: Observable<AuthResponseData>;
-
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password);
     } else {
@@ -43,7 +44,7 @@ export class AuthComponent {
 
     authObs.subscribe(
       (res) => {
-        console.log(res);
+        this.route.navigate(['/recipes']);
       },
       (errorRes) => {
         if (errorRes.error && errorRes.error.error.message) {
