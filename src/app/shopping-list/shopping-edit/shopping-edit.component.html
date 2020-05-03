@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-md-12">
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <form
+      novalidate
+      (ngSubmit)="onSubmit(shoppingForm)"
+      [formGroup]="shoppingForm"
+    >
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
@@ -8,10 +12,7 @@
             type="text"
             id="name"
             class="form-control"
-            required
-            name="name"
-            ngModel
-            #ingredient="ngModel"
+            formControlName="name"
           />
         </div>
         <div class="col-sm-2 form-group">
@@ -20,10 +21,7 @@
             class="form-control"
             id="amount"
             type="number"
-            required
-            name="amount"
-            ngModel
-            #amount="ngModel"
+            formControlName="amount"
           />
         </div>
       </div>
@@ -32,13 +30,20 @@
         <div class="col-sm-12 btn-container">
           <button
             class="btn btn-success"
-            [ngClass]="{ disabled: shoppingForm.invalid }"
+            [ngClass]="{ disabled: !shoppingForm.valid }"
             type="submit"
           >
             Add
           </button>
           <button class="btn btn-danger" type="button">Delete</button>
-          <button class="btn btn-primary" type="button" (click)="resetForm()">Clear</button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            [ngClass]="{ disabled: !shoppingForm.dirty }"
+            (click)="resetForm()"
+          >
+            Clear
+          </button>
         </div>
       </div>
     </form>
