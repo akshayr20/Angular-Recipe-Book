@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  rest_api: 'https://recipe-ingredients-shopping.firebaseio.com/',
 };

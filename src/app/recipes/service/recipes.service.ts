@@ -9,31 +9,7 @@ import { ToastService } from 'src/app/toast/toast-service';
   providedIn: 'root',
 })
 export class RecipesService {
-  private recipes: Array<Recipe> = [
-    new Recipe(
-      'Veg Sandwich',
-      'A super tasty french veg sandwich',
-      'https://c1.peakpx.com/wallpaper/368/646/353/sandwich-ham-cheese-pommes-fast-food-wallpaper-preview.jpg',
-      [
-        new Ingredient('Bread', 2),
-        new Ingredient('Carrots', 1),
-        new Ingredient('Pickle', 1),
-        new Ingredient('Tomatoes', 2),
-      ]
-    ),
-    new Recipe(
-      'Chicken Stack Burger',
-      'The most popular chicken stack burger',
-      'https://img1.mashed.com/img/gallery/the-best-copycat-popeyes-chicken-sandwich-recipe/the-perfect-popeyes-chicken-sandwich-directions-1574269393.jpg',
-      [
-        new Ingredient('Chicken', 2),
-        new Ingredient('Bun', 2),
-        new Ingredient('Tomatoes', 1),
-        new Ingredient('Onion', 1),
-      ]
-    ),
-  ];
-
+  private recipes: Array<Recipe> = [];
   private recipes$ = new BehaviorSubject<Array<Recipe>>(this.recipes);
 
   constructor(
@@ -47,6 +23,11 @@ export class RecipesService {
 
   getRecipe(index: number) {
     return this.recipes[index];
+  }
+
+  setRecipe(recipes: Array<Recipe>) {
+    this.recipes = recipes;
+    this.recipes$.next(this.recipes);
   }
 
   addIngredientsToShoppingList(ingredients: Array<Ingredient>) {

@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { BackendService } from '../shared/services/backend.service';
 
 @Component({
   selector: 'app-header',
@@ -6,12 +7,15 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Output() selectedFeature = new EventEmitter<string>();
   collapsed = true;
   navCollapsed = true;
-  constructor() {}
+  constructor(private backendService: BackendService) {}
 
-  onSelect(feature: string) {
-    this.selectedFeature.emit(feature);
+  saveData() {
+    this.backendService.storeRecipes();
+  }
+
+  fetchData() {
+    this.backendService.fetchRecipes();
   }
 }
