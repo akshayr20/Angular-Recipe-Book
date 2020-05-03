@@ -70,4 +70,10 @@ export class RecipesService {
     this.recipes$.next(this.recipes.slice());
     this.toastService.success('Recipe Updated successfully!');
   }
+
+  deleteRecipe(index: number) {
+    this.recipes = this.recipes.filter((recipe, i) => i !== index);
+    this.toastService.danger('Recipe Deleted successfully!');
+    this.recipes$.next(this.recipes.slice());
+  }
 }
