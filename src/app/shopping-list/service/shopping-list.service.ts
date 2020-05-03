@@ -52,7 +52,6 @@ export class ShoppingListService {
 
   deleteIngredient(index) {
     this.ingredients = this.ingredients.filter((ingredient, i) => i !== index);
-    console.log(this.ingredients);
     this.ingredients$.next(this.ingredients.slice());
     this.toastService.danger('Ingredient deleted successfully!');
   }
