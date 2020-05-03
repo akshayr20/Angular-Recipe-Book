@@ -33,14 +33,21 @@
             [ngClass]="{ disabled: !shoppingForm.valid }"
             type="submit"
           >
-            Add
+            {{ editMode ? "Update" : "Add" }}
           </button>
-          <button class="btn btn-danger" type="button">Delete</button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            [ngClass]="{ disabled: !editMode }"
+            (click)="deleteIngredient()"
+          >
+            Delete
+          </button>
           <button
             class="btn btn-primary"
             type="button"
-            [ngClass]="{ disabled: !shoppingForm.dirty }"
-            (click)="resetForm()"
+            [ngClass]="{ disabled: !shoppingForm.dirty || !editMode }"
+            (click)="clearForm()"
           >
             Clear
           </button>
