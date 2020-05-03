@@ -10,32 +10,61 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./shopping-edit.component.scss'],
 })
 export class ShoppingEditComponent implements OnInit {
-  shoppingForm: FormGroup;
   @Output() ingredientAdded = new EventEmitter<Ingredient>();
+  shoppingForm: FormGroup;
+  editMode = false;
+  editModeIndex: number;
 
   constructor(
     private toastService: ToastService,
     private shoppingListService: ShoppingListService,
     private fb: FormBuilder
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.shoppingForm = this.fb.group({
       name: ['', [Validators.required]],
       amount: [1, [Validators.required, Validators.pattern('^[1-9]+[0-9]*$')]],
     });
   }
 
+  ngOnInit() {
+    this.shoppingListService.startedEditing$.subscribe((index) => {
+      this.editMode = true;
+      this.editModeIndex = index;
+      const { name, amount } = this.shoppingListService.getIngredient(index);
+      this.shoppingForm.patchValue({ name, amount });
+    });
+  }
+
   onSubmit(shoppingForm) {
     if (shoppingForm.valid) {
       const { name, amount } = this.shoppingForm.value;
-      shoppingForm.reset();
-      this.shoppingListService.addIngredient(new Ingredient(name, amount));
+      if (this.editMode) {
+        this.shoppingListService.upgradeIngredient(
+          this.editModeIndex,
+          new Ingredient(name, amount)
+        );
+      } else {
+        this.shoppingListService.addIngredient(new Ingredient(name, amount));
+      }
+      this.resetForm();
     }
   }
 
   resetForm() {
     this.shoppingForm.reset();
+    this.editMode = false;
+    this.editModeIndex = null;
+  }
+
+  clearForm() {
+    this.resetForm();
     this.toastService.warning('Form cleared successfully!');
+  }
+
+  deleteIngredient() {
+    if (this.editMode) {
+      this.shoppingListService.deleteIngredient(this.editModeIndex);
+      this.resetForm();
+    }
   }
 }

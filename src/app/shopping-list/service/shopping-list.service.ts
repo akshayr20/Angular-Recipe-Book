@@ -12,12 +12,20 @@ export class ShoppingListService {
     new Ingredient('Tomatoes', 3),
   ];
 
-  private ingredients$ = new BehaviorSubject<Array<Ingredient>>(this.ingredients);
+  private ingredients$ = new BehaviorSubject<Array<Ingredient>>(
+    this.ingredients
+  );
+
+  public startedEditing$ = new Subject<number>();
 
   constructor(private toastService: ToastService) {}
 
-  getIngredient() {
+  getIngredients() {
     return this.ingredients$;
+  }
+
+  getIngredient(index) {
+    return this.ingredients[index];
   }
 
   addIngredient(ingredient: Ingredient) {
@@ -29,5 +37,23 @@ export class ShoppingListService {
   addIngredients(ingredients: Array<Ingredient>) {
     this.ingredients = [...this.ingredients, ...ingredients];
     this.ingredients$.next(this.ingredients.slice());
+  }
+
+  upgradeIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients = this.ingredients.map((ingredient, i) => {
+      if (i === index) {
+        return newIngredient;
+      }
+      return ingredient;
+    });
+    this.ingredients$.next(this.ingredients.slice());
+    this.toastService.success('Ingredient updated successfully!');
+  }
+
+  deleteIngredient(index) {
+    this.ingredients = this.ingredients.filter((ingredient, i) => i !== index);
+    console.log(this.ingredients);
+    this.ingredients$.next(this.ingredients.slice());
+    this.toastService.danger('Ingredient deleted successfully!');
   }
 }
