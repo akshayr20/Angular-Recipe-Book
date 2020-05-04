@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { tap, take, exhaustMap } from 'rxjs/operators';
 
 import { RecipesService } from 'src/app/recipes/service/recipes.service';
 import { environment } from 'src/environments/environment';
 import { Recipe } from 'src/app/recipes/recipe.model';
 import { ToastService } from 'src/app/toast/toast-service';
+import { AuthService } from 'src/app/auth/service/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class BackendService {
   constructor(
     private http: HttpClient,
     private recipeService: RecipesService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService
   ) {}
 
   storeRecipes() {
@@ -27,11 +29,20 @@ export class BackendService {
   }
 
   fetchRecipes() {
-    return this.http
-      .get<Array<Recipe>>(`${environment.rest_api}/recipes.json`)
-      .pipe(tap((recipes) => {
+    return this.authService.user$.pipe(
+      take(1),
+      exhaustMap((user) => {
+        return this.http.get<Array<Recipe>>(
+          `${environment.rest_api}recipes.json`,
+          {
+            params: new HttpParams().set('auth', user && user.token)
+          }
+        );
+      }),
+      tap((recipes) => {
         console.log(recipes);
-        this.recipeService.setRecipe(recipes)
-      }));
+        this.recipeService.setRecipe(recipes);
+      })
+    );
   }
 }

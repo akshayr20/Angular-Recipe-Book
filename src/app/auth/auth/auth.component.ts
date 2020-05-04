@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent {
   authForm: FormGroup;
-  isLoginMode = false;
+  isLoginMode = true;
   errorMessage = '';
   constructor(
     private route: Router,

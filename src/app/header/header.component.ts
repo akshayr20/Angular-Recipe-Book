@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.user.subscribe((user) => {
+    this.authService.user$.subscribe((user) => {
       this.isAuthenticated = !!user;
     });
   }
@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
   }
 
   fetchData() {
-    this.backendService.fetchRecipes();
+    this.backendService.fetchRecipes().subscribe(res =>  {
+      console.log(res);
+    });
   }
 }

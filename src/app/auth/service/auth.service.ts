@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../model/auth.model';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 export interface AuthResponseData {
@@ -18,7 +18,8 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<User>(null);
+  private API_KEY = 'AIzaSyAy4ROm6uVhAm7gqtQk7_0M6QepnJSQVLY';
+  user$ = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +31,7 @@ export class AuthService {
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, localId, refreshToken, expirationDate);
-    this.user.next(user);
+    this.user$.next(user);
   }
 
   signUp(email: string, password: string) {
@@ -40,7 +41,7 @@ export class AuthService {
       returnSecureToken: true,
     };
     return this.http
-      .post<AuthResponseData>(`${environment.auth}`, authPayload)
+      .post<AuthResponseData>(`${environment.auth}${this.API_KEY}`, authPayload)
       .pipe(
         tap((resData) => {
           if (resData.email) {
@@ -62,7 +63,7 @@ export class AuthService {
       returnSecureToken: true,
     };
     return this.http
-      .post<AuthResponseData>(`${environment.login}`, authPayload)
+      .post<AuthResponseData>(`${environment.login}${this.API_KEY}`, authPayload)
       .pipe(
         tap((resData) => {
           if (resData.email) {
