@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Ingredient } from 'src/app/shopping-list/model/ingredient.model';
-import { ToastService } from 'src/app/toast/toast-service';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { Ingredient } from '../model/ingredient.model';
+import { ToastService } from 'src/app/shared/toast/toast-service';
 
 @Injectable({
   providedIn: 'root',

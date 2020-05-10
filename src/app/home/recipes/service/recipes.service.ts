@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Recipe } from '../recipe.model';
-import { Ingredient } from 'src/app/shopping-list/model/ingredient.model';
-import { ShoppingListService } from 'src/app/shopping-list/service/shopping-list.service';
-import { BehaviorSubject } from 'rxjs';
-import { ToastService } from 'src/app/toast/toast-service';
+import { ShoppingListService } from '../../shopping-list/service/shopping-list.service';
+import { Ingredient } from '../../shopping-list/model/ingredient.model';
+import { ToastService } from 'src/app/shared/toast/toast-service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +17,7 @@ export class RecipesService {
   ) {}
 
   fetchRecipes() {
-    this.db.list('recipes').valueChanges().subscribe(res =>  {
-      console.log(res);
-    });
+    return this.db.list<Recipe>('recipes').valueChanges();
   }
 
   createRecipe(recipe: Recipe) {

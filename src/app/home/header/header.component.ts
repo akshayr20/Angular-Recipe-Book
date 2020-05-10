@@ -11,8 +11,7 @@ export class HeaderComponent implements OnInit {
   collapsed = true;
   navCollapsed = true;
   isAuthenticated = false;
-  constructor() // private backendService: BackendService,
-  {}
+  constructor() {}
 
   ngOnInit() {
     // this.authService.user$.subscribe((user) => {

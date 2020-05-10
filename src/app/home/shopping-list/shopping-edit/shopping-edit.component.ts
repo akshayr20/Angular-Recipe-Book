@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Ingredient } from '../model/ingredient.model';
-import { ToastService } from 'src/app/toast/toast-service';
 import { ShoppingListService } from '../service/shopping-list.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/toast/toast-service';
 
 @Component({
   selector: 'app-shopping-edit',
