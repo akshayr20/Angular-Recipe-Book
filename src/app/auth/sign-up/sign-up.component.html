@@ -10,8 +10,18 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="First name" />
-            <input type="text" class="form-control" placeholder="Last name" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="First name"
+              formControlName="firstName"
+            />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Last name"
+              formControlName="lastName"
+            />
           </div>
 
           <div class="input-group form-group">
@@ -20,7 +30,12 @@
                 <i class="fas fa-envelope"></i>
               </span>
             </div>
-            <input type="email" class="form-control" placeholder="email" />
+            <input
+              type="email"
+              class="form-control"
+              placeholder="email"
+              formControlName="email"
+            />
           </div>
 
           <div class="input-group form-group">
@@ -31,6 +46,7 @@
               type="password"
               class="form-control"
               placeholder="password"
+              formControlName="password"
             />
           </div>
 
@@ -45,9 +61,10 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-center links">
-          Already have an account? &nbsp; <a routerLink="/auth">Sign In</a>
+          Already have an account? &nbsp; <a routerLink="../sign-in">Sign In</a>
         </div>
       </div>
     </div>
   </div>
+  <span class="error" *ngIf="error">{{ error }}</span>
 </div>

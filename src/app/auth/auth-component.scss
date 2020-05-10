@@ -1,12 +1,19 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .container {
-  height: 100%;
-  align-content: center;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card {
-  height: 370px;
-  margin-top: auto;
-  margin-bottom: auto;
+  height: 350px;
   width: 400px;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -68,4 +75,13 @@ input:focus {
 
 .links {
   color: white;
+}
+
+.error {
+  color: #fff;
+  padding: 8px 12px;
+  width: 400px;
+  flex-wrap: wrap;
+  background-color: red;
+  margin-top: 16px;
 }

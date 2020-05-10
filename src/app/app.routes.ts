@@ -5,8 +5,6 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { AuthComponent } from './auth/sign-in/sign-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {
@@ -16,11 +14,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthComponent,
-  },
-  {
-    path: 'sign-up',
-    component: SignUpComponent,
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'recipes',

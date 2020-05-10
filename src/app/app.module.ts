@@ -29,9 +29,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ToastsContainer } from './toast/toasts-container.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { AuthComponent } from './auth/sign-in/sign-in.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +45,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
     ToastsContainer,
     RecipeStartComponent,
     RecipeEditComponent,
-    AuthComponent,
     LoadingSpinnerComponent,
-    SignUpComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,

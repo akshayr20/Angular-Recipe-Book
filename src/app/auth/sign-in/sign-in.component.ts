@@ -9,8 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './sign-in.component.html',
   styleUrls: ['../auth-component.scss'],
 })
-export class AuthComponent {
-  authForm: FormGroup;
+export class SignInComponent {
+  signInForm: FormGroup;
   returnUrl = '/';
   error: any;
   googleAuthProvider = new firebase.auth.GoogleAuthProvider();
@@ -24,7 +24,7 @@ export class AuthComponent {
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
-    this.authForm = this.fb.group({
+    this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -70,14 +70,16 @@ export class AuthComponent {
   }
 
   loginEmail() {
-    if (this.authForm.valid) {
-      const { email, password } = this.authForm.value;
+    if (this.signInForm.valid) {
+      const { email, password } = this.signInForm.value;
       this.afAuth
         .signInWithEmailAndPassword(email, password)
         .then((success) => {
+          console.log('success', success);
           this.router.navigate([this.returnUrl]);
         })
         .catch((err) => {
+          console.log('err', err);
           this.error = err;
         });
     }

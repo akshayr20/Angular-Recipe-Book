@@ -1,7 +1,6 @@
 <div class="container">
   <div class="d-flex justify-content-center h-100">
     <div class="card">
-      <span class="error" *ngIf="error">{{ error }}</span>
       <div class="card-header">
         <h3>Sign In</h3>
         <div class="d-flex justify-content-end social_icon">
@@ -17,12 +16,17 @@
         </div>
       </div>
       <div class="card-body">
-        <form novalidate (ngSubmit)="loginEmail()" [formGroup]="authForm">
+        <form novalidate (ngSubmit)="loginEmail()" [formGroup]="signInForm">
           <div class="input-group form-group">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="username" />
+            <input
+              type="email"
+              class="form-control"
+              placeholder="email"
+              formControlName="email"
+            />
           </div>
           <div class="input-group form-group">
             <div class="input-group-prepend">
@@ -32,6 +36,7 @@
               type="password"
               class="form-control"
               placeholder="password"
+              formControlName="password"
             />
           </div>
           <div class="row align-items-center remember">
@@ -48,7 +53,7 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-center links">
-          Don't have an account? &nbsp;<a routerLink="/sign-up">Sign Up</a>
+          Don't have an account? &nbsp;<a routerLink="../sign-up">Sign Up</a>
         </div>
         <div class="d-flex justify-content-center">
           <a>Forgot your password?</a>
@@ -56,4 +61,5 @@
       </div>
     </div>
   </div>
+  <span class="error" *ngIf="error">{{ error }}</span>
 </div>
