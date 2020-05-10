@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { Ingredient } from '../../shared/models/ingredient.model';
+import { Ingredient } from '../model/ingredient.model';
 import { ToastService } from 'src/app/toast/toast-service';
 import { ShoppingListService } from '../service/shopping-list.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

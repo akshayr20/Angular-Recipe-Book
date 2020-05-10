@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../service/recipes.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
 })
 export class RecipesListComponent implements OnInit {
-  recipes$: BehaviorSubject<Array<Recipe>>;
+  recipes$: Observable<Recipe[]>;
 
   constructor(
     private recipesService: RecipesService,
@@ -17,7 +17,7 @@ export class RecipesListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.recipes$ = this.recipesService.getRecipes();
+    this.recipesService.fetchRecipes();
   }
 
   goToCreateNewRecipe() {

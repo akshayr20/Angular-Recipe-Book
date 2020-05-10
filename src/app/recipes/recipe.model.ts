@@ -1,6 +1,7 @@
-import { Ingredient } from '../shared/models/ingredient.model';
+import { Ingredient } from '../shopping-list/model/ingredient.model';
 
 export class Recipe {
+  id: string;
   public name: string;
   public description: string;
   public imagePath: string;

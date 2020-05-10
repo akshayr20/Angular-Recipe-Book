@@ -4,10 +4,16 @@
 
 export const environment = {
   production: false,
-  rest_api: 'https://recipe-ingredients-shopping.firebaseio.com/',
-  auth: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=`,
-  login:
-    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+  firebaseConfig: {
+    apiKey: 'AIzaSyAy4ROm6uVhAm7gqtQk7_0M6QepnJSQVLY',
+    authDomain: 'recipe-ingredients-shopping.firebaseapp.com',
+    databaseURL: 'https://recipe-ingredients-shopping.firebaseio.com',
+    projectId: 'recipe-ingredients-shopping',
+    storageBucket: 'recipe-ingredients-shopping.appspot.com',
+    messagingSenderId: '659446912679',
+    appId: '1:659446912679:web:d44d0ccb0984e072da6d82',
+    measurementId: 'G-8FYZ6D00FV',
+  },
 };
 
 /*

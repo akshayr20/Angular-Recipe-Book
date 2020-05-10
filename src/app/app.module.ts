@@ -2,7 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app.routes';
 
@@ -21,9 +29,9 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ToastsContainer } from './toast/toasts-container.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeResolverService } from './recipes/service/recipe-resolver.service';
-import { AuthComponent } from './auth/auth/auth.component';
-import { AuthHttpInterceptorService } from './core/http-interceptor.service';
+import { AuthComponent } from './auth/sign-in/sign-in.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +47,8 @@ import { AuthHttpInterceptorService } from './core/http-interceptor.service';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
+    LoadingSpinnerComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -46,17 +56,18 @@ import { AuthHttpInterceptorService } from './core/http-interceptor.service';
     ReactiveFormsModule,
     NgbModule,
     AppRoutingModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
   ],
   providers: [
     ToastService,
     RecipesService,
     ShoppingListService,
-    RecipeResolverService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptorService,
-      multi: true,
-    },
   ],
   bootstrap: [AppComponent],
 })

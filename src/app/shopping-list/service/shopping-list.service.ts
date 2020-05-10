@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { Ingredient } from 'src/app/shopping-list/model/ingredient.model';
 import { ToastService } from 'src/app/toast/toast-service';
 import { Subject, BehaviorSubject } from 'rxjs';
 

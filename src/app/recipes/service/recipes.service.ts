@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 import { Recipe } from '../recipe.model';
-import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { Ingredient } from 'src/app/shopping-list/model/ingredient.model';
 import { ShoppingListService } from 'src/app/shopping-list/service/shopping-list.service';
 import { BehaviorSubject } from 'rxjs';
 import { ToastService } from 'src/app/toast/toast-service';
@@ -9,52 +11,31 @@ import { ToastService } from 'src/app/toast/toast-service';
   providedIn: 'root',
 })
 export class RecipesService {
-  private recipes: Array<Recipe> = [];
-  private recipes$ = new BehaviorSubject<Array<Recipe>>(this.recipes);
-
   constructor(
     private shoppingListService: ShoppingListService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private db: AngularFireDatabase
   ) {}
 
-  getRecipes() {
-    return this.recipes$;
+  fetchRecipes() {
+    this.db.list('recipes').valueChanges().subscribe(res =>  {
+      console.log(res);
+    });
   }
 
-  getRecipe(index: number) {
-    return this.recipes[index];
+  createRecipe(recipe: Recipe) {
+    return this.db.database.ref('recipes').push(recipe);
   }
 
-  setRecipe(recipes: Array<Recipe>) {
-    this.recipes = recipes;
-    this.recipes$.next(this.recipes);
+  updateRecipe(index: string, updatedRecipe: Recipe) {
+    return this.db.list<Recipe>('recipe').update(index, updatedRecipe);
+  }
+
+  deleteRecipe(index: string) {
+    return this.db.list('recipe').remove(index);
   }
 
   addIngredientsToShoppingList(ingredients: Array<Ingredient>) {
     this.shoppingListService.addIngredients(ingredients);
-  }
-
-  addRecipe(recipe: Recipe) {
-    this.recipes = [...this.recipes, recipe];
-    this.recipes$.next(this.recipes.slice());
-    this.toastService.success('Recipe Added successfully!');
-  }
-
-  updateRecipe(index: number, updatedRecipe: Recipe) {
-    this.recipes = this.recipes.map((recipe, i) => {
-      if (i === index) {
-        return updatedRecipe;
-      } else {
-        return recipe;
-      }
-    });
-    this.recipes$.next(this.recipes.slice());
-    this.toastService.success('Recipe Updated successfully!');
-  }
-
-  deleteRecipe(index: number) {
-    this.recipes = this.recipes.filter((recipe, i) => i !== index);
-    this.toastService.danger('Recipe Deleted successfully!');
-    this.recipes$.next(this.recipes.slice());
   }
 }

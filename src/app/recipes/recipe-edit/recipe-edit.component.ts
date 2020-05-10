@@ -28,6 +28,7 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit(): void {
     let recipe: Recipe = {
+      id: '',
       name: '',
       description: '',
       imagePath: '',
@@ -37,7 +38,7 @@ export class RecipeEditComponent implements OnInit {
       if (params.id) {
         this.editMode = true;
         this.recipeIndex = +params.id;
-        recipe = this.recipeService.getRecipe(this.recipeIndex);
+        // recipe = this.recipeService.getRecipe(this.recipeIndex);
       }
       this.initForm(recipe);
     });
@@ -82,12 +83,12 @@ export class RecipeEditComponent implements OnInit {
   onSubmit() {
     if (this.recipeForm.valid) {
       if (this.editMode) {
-        this.recipeService.updateRecipe(
-          this.recipeIndex,
-          this.recipeForm.value
-        );
+        // this.recipeService.updateRecipe(
+        //   this.recipeIndex,
+        //   this.recipeForm.value
+        // );
       } else {
-        this.recipeService.addRecipe(this.recipeForm.value);
+        this.recipeService.createRecipe(this.recipeForm.value);
       }
       this.router.navigate(['../'], { relativeTo: this.route });
     }
