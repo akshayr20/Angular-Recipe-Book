@@ -1,7 +1,7 @@
 import { Ingredient } from '../shopping-list/model/ingredient.model';
 
 export class Recipe {
-  id: string;
+  public key?:string;
   public name: string;
   public description: string;
   public imagePath: string;

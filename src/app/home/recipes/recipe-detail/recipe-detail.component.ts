@@ -10,7 +10,7 @@ import { Ingredient } from '../../shopping-list/model/ingredient.model';
 })
 export class RecipeDetailComponent implements OnInit {
   selectedRecipe: Recipe;
-  selectedRecipeId: number;
+  selectedRecipeKey: string;
   constructor(
     private recipeService: RecipesService,
     private route: ActivatedRoute,
@@ -19,8 +19,9 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.selectedRecipeId = +params.id;
-      // this.selectedRecipe = this.recipeService.getRecipe(this.selectedRecipeId);
+      this.selectedRecipeKey = params.key;
+      this.selectedRecipe = this.recipeService.getRecipeByKey(this.selectedRecipeKey);
+      console.log(this.selectedRecipe);
     });
   }
 

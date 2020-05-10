@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-auth',
   template: `<router-outlet></router-outlet>`,
 })
-export class AuthComponent implements OnInit {
-  ngOnInit() {
-    console.log('AuthComponent Loaded');
-  }
-}
+export class AuthComponent {}

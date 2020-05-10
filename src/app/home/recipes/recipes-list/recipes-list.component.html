@@ -6,10 +6,9 @@
 
 <hr />
 
-<ng-container *ngIf="recipes$ | async as recipes">
+<ng-container *ngIf="recipes">
   <app-recipe-item
-    *ngFor="let recipeEl of recipes; let i = index"
+    *ngFor="let recipeEl of recipes"
     [recipe]="recipeEl"
-    [index]="i"
   ></app-recipe-item>
 </ng-container>

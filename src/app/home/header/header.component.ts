@@ -1,23 +1,16 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-// import { BackendService } from '../shared/services/backend.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   collapsed = true;
   navCollapsed = true;
   isAuthenticated = false;
-  constructor() {}
-
-  ngOnInit() {
-    // this.authService.user$.subscribe((user) => {
-    //   this.isAuthenticated = !!user;
-    // });
-  }
+  constructor(private authService: AuthService) {}
 
   saveData() {
     // this.backendService.storeRecipes();
@@ -27,5 +20,9 @@ export class HeaderComponent implements OnInit {
     // this.backendService.fetchRecipes().subscribe(res =>  {
     //   console.log(res);
     // });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

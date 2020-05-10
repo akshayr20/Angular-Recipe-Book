@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +12,11 @@ export class SignUpComponent {
   signUpForm: FormGroup;
   error: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.signUpForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
@@ -21,7 +27,15 @@ export class SignUpComponent {
 
   signUp() {
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm.value);
+      const { email, password } = this.signUpForm.value;
+      this.authService
+        .createUserWithEmailAndPassword(email, password)
+        .then((success) => {
+          this.router.navigate(['/auth']);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 }

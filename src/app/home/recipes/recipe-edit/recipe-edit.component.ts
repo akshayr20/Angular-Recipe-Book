@@ -17,7 +17,7 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeEditComponent implements OnInit {
   editMode = false;
-  recipeIndex: number;
+  recipeKey: string;
   recipeForm: FormGroup;
   constructor(
     private route: ActivatedRoute,
@@ -28,16 +28,15 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit(): void {
     let recipe: Recipe = {
-      id: '',
       name: '',
       description: '',
       imagePath: '',
       ingredients: [],
     };
     this.route.params.subscribe((params: Params) => {
-      if (params.id) {
+      if (params.key) {
         this.editMode = true;
-        this.recipeIndex = +params.id;
+        this.recipeKey = params.key;
         // recipe = this.recipeService.getRecipe(this.recipeIndex);
       }
       this.initForm(recipe);
@@ -83,10 +82,10 @@ export class RecipeEditComponent implements OnInit {
   onSubmit() {
     if (this.recipeForm.valid) {
       if (this.editMode) {
-        // this.recipeService.updateRecipe(
-        //   this.recipeIndex,
-        //   this.recipeForm.value
-        // );
+        this.recipeService.updateRecipe(
+          this.recipeKey,
+          this.recipeForm.value
+        );
       } else {
         this.recipeService.createRecipe(this.recipeForm.value);
       }

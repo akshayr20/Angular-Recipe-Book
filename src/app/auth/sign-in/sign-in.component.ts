@@ -1,25 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as firebase from 'firebase';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['../auth-component.scss'],
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   returnUrl = '/';
   error: any;
-  googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-  facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 
   showSpinner = localStorage.getItem('showSpinner') === 'true' ? true : false;
 
   constructor(
-    public afAuth: AngularFireAuth,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
@@ -29,7 +26,7 @@ export class SignInComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
-    this.afAuth.authState.subscribe((auth) => {
+    this.authService.authState().subscribe((auth) => {
       localStorage.setItem('showSpinner', 'false');
       if (auth) {
         this.router.navigateByUrl(this.returnUrl);
@@ -37,12 +34,17 @@ export class SignInComponent {
     });
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(
+      (params) => (this.returnUrl = params.returnUrl || '/home')
+    );
+  }
+
   loginFb() {
     this.showSpinner = true;
     localStorage.setItem('showSpinner', 'true');
-    this.afAuth.signInWithRedirect(this.facebookAuthProvider);
-    this.afAuth
-      .getRedirectResult()
+    this.authService
+      .loginFb()
       .then((result) => {
         if (result.user) {
           this.showSpinner = true;
@@ -50,7 +52,7 @@ export class SignInComponent {
           this.router.navigate([this.returnUrl]);
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -59,8 +61,8 @@ export class SignInComponent {
   }
 
   loginGoogle() {
-    this.afAuth
-      .signInWithRedirect(this.googleAuthProvider)
+    this.authService
+      .loginGoogle()
       .then((success) => {
         this.router.navigate([this.returnUrl]);
       })
@@ -72,8 +74,8 @@ export class SignInComponent {
   loginEmail() {
     if (this.signInForm.valid) {
       const { email, password } = this.signInForm.value;
-      this.afAuth
-        .signInWithEmailAndPassword(email, password)
+      this.authService
+        .loginEmail(email, password)
         .then((success) => {
           console.log('success', success);
           this.router.navigate([this.returnUrl]);
