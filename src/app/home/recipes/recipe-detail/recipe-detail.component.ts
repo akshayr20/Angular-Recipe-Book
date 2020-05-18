@@ -20,8 +20,10 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.selectedRecipeKey = params.key;
-      this.selectedRecipe = this.recipeService.getRecipeByKey(this.selectedRecipeKey);
-      console.log(this.selectedRecipe);
+      setTimeout(() => {
+        this.recipeService.getRecipeByKey(this.selectedRecipeKey);
+        console.log(this.selectedRecipe);
+      }, 2000);
     });
   }
 

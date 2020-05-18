@@ -17,9 +17,14 @@ export class AuthService {
   }
 
   public logout() {
-    this.afAuth.signOut().then((res) => {
-      this.router.navigate(['/']);
-    });
+    this.afAuth.signOut().then(
+      (res) => {
+        this.router.navigate(['/auth']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   public loginFb() {

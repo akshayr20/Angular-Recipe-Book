@@ -36,7 +36,9 @@ export class RecipesService {
   }
 
   getRecipeByKey(key: string) {
-    return this.recipes.query[key];
+    // TODO:  Find a way to get item from the list
+    const recipe = this.recipes.query.ref.child(key);
+    return;
   }
 
   createRecipe(recipe: Recipe) {
